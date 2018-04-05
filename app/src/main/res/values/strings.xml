@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">V Festival</string>
+
+    /* Titles */
+    <string name="title_home">Home</string>
+    <string name="title_lineup">Line Up</string>
+    <string name="title_tickets">Tickets</string>
+</resources>
