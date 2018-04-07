@@ -3,33 +3,22 @@ package com.vfestival;
 
 public class Artists {
     public static String[] title = new String[]{
-            "Test",
-            "Test 2",
-            "Test 3",
-            "Test",
-            "Test 2",
-            "Test 3",
-            "Test",
-            "Test 2",
-            "Test 3",
-            "Test",
-            "Test 2",
-            "Test 3",
+            "Jay Z",
+            "Coldplay",
+            "Bastille",
+            "George Ezra",
+            "The Killers",
+            "The Lumineers",
 
     };
 
     public static  int[] imgPath = new int[]{
-            R.drawable.themartian,
-            R.drawable.thevigitarian,
-            R.drawable.thewildrobot,
-            R.drawable.themartian,
-            R.drawable.thevigitarian,
-            R.drawable.thewildrobot,
-            R.drawable.themartian,
-            R.drawable.thevigitarian,
-            R.drawable.thewildrobot,
-            R.drawable.themartian,
-            R.drawable.thevigitarian,
-            R.drawable.thewildrobot,
+            R.drawable.jay_z,
+            R.drawable.coldplay,
+            R.drawable.bastille,
+            R.drawable.george_ezra,
+            R.drawable.killers,
+            R.drawable.lumineers,
+
     };
 }

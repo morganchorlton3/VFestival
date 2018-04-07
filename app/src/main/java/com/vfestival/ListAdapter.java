@@ -1,5 +1,6 @@
 package com.vfestival;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,8 @@ public class ListAdapter extends RecyclerView.Adapter {
         }
 
         public void onClick(View view){
-            System.out.println("Blah TESTING");
+            Intent intent = new Intent(view.getContext(), LineUpDetailsActivity.class);
+            view.getContext().startActivity(intent);
         }
 
     }

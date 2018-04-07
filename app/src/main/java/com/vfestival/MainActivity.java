@@ -1,27 +1,18 @@
 package com.vfestival;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-
 import com.vfestival.Fragments.HomeFragment;
 import com.vfestival.Fragments.LineUpFragment;
 import com.vfestival.Fragments.TicketsFragment;
 
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-
-
     Fragment fragment = null;
 
     public void switchToFragment(Fragment fragment) {
@@ -70,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
+
 
     }
 }
