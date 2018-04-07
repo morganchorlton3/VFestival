@@ -5,4 +5,5 @@
     <string name="title_home">Home</string>
     <string name="title_lineup">Line Up</string>
     <string name="title_tickets">Tickets</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>

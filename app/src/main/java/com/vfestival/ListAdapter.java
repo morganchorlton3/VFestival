@@ -27,23 +27,20 @@ public class ListAdapter extends RecyclerView.Adapter {
 
     private class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private TextView mItemText;
         private ImageView mItemImage;
 
         public ListViewHolder(View itemView){
             super(itemView);
-            mItemText = (TextView) itemView.findViewById(R.id.itemText);
             mItemImage = (ImageView) itemView.findViewById(R.id.itemImage);
             itemView.setOnClickListener(this);
         }
 
         public void bindView(int position){
-            mItemText.setText(Artists.title[position]);
             mItemImage.setImageResource(Artists.imgPath[position]);
         }
 
         public void onClick(View view){
-
+            System.out.println("Blah TESTING");
         }
 
     }
