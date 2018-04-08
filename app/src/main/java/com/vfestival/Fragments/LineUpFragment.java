@@ -27,7 +27,6 @@ public class LineUpFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcview.setLayoutManager(layoutManager);
 
-
         return v;
     }
 

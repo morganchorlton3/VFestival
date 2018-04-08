@@ -12,8 +12,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class LineUpDetailsActivity extends AppCompatActivity {
 
-    private GoogleMap map;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,18 +19,5 @@ public class LineUpDetailsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        SupportMapFragment mapFragment = (SupportMapFragment)
-                getSupportFragmentManager()
-                        .findFragmentById(R.id.mapView);
-        mapFragment.getMapAsync((OnMapReadyCallback) this);
-    }
-
-
-    public void onMapReady(GoogleMap googleMap) {
-        this.map = googleMap;
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
     }
 }
