@@ -1,7 +1,6 @@
 package com.vfestival;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,9 @@ import android.widget.TextView;
 
 
 public class ListAdapter extends RecyclerView.Adapter {
+
+    String bio, name;
+    int thumbnail;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,25 +37,25 @@ public class ListAdapter extends RecyclerView.Adapter {
 
         public ListViewHolder(View itemView){
             super(itemView);
-            mItemText = (TextView) itemView.findViewById(R.id.itemText);
-            mItemImage = (ImageView) itemView.findViewById(R.id.itemImage);
+            mItemText = itemView.findViewById(R.id.itemText);
+            mItemImage = itemView.findViewById(R.id.artistImage);
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
         }
         public void bindView(int position){
-            mItemText.setText(Artists.name[position]);
-            mItemImage.setImageResource(Artists.thumbnail[position]);
+            name = Artists.name[position];
+            bio = Artists.bio[position];
+            thumbnail = Artists.thumbnail[position];
+            mItemText.setText(name);
+            mItemImage.setImageResource(thumbnail);
+            bio = Artists.bio[position];
         }
 
         public void onClick(View view){
             Intent intent = new Intent(view.getContext(), LineUpDetailsActivity.class);
+            intent.putExtra("bio", bio);
+            intent.putExtra("thumbnail", thumbnail);
             view.getContext().startActivity(intent);
-        }
-        public void onItemClicked(int position) {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("Name",Artists.name[position]);
-            bundle.putSerializable("Bio",Artists.bio[position]);
-            bundle.putSerializable("Thumbnail",Artists.thumbnail[position]);
         }
 
     }

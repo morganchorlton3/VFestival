@@ -5,25 +5,32 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/itemImage"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_margin="0dp"
-        android:scaleType="centerCrop" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/itemText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/itemImage"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="5dip"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/pt_sans_regular"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30sp" />
+        <ImageView
+            android:id="@+id/artistImage"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="0dp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/itemText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/artistImage"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dip"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/pt_sans_regular"
+            android:text="Hello"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+    </LinearLayout>
 
 </RelativeLayout>

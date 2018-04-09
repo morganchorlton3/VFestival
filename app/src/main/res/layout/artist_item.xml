@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/itemImage"
+        android:id="@+id/artistImage"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:layout_margin="0dp"
@@ -16,7 +16,7 @@
         android:id="@+id/itemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/itemImage"
+        android:layout_alignBottom="@+id/artistImage"
         android:layout_centerInParent="true"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="5dip"

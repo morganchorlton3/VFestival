@@ -28,16 +28,15 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/NameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#0c53e2"
                 android:ems="10"
                 android:hint="Name"
-                android:textColor="@color/white"
                 android:inputType="textPersonName"
-                android:backgroundTint="#0c53e2"
-                android:textColorHint="@color/white"
-                />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
             <EditText
                 android:id="@+id/PhoneNumInput"
@@ -50,6 +49,24 @@
                 android:textColorHint="@color/white"
                 android:backgroundTint="#0c53e2"
                 android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/EmailInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="App_EditTextStyle"
+                android:ems="10"
+                android:hint="Email"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:backgroundTint="#0c53e2"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/RegisterBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Register" />
 
         </LinearLayout>
     </LinearLayout>
