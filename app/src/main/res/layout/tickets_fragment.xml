@@ -24,19 +24,15 @@
                 android:paddingBottom="25dp"
                 android:paddingLeft="5dp"
                 android:text="Book Tickets"
-                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/NameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#0c53e2"
                 android:ems="10"
                 android:hint="Name"
-                android:inputType="textPersonName"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/PhoneNumInput"
@@ -45,9 +41,6 @@
                 style="App_EditTextStyle"
                 android:ems="10"
                 android:hint="Phone"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:backgroundTint="#0c53e2"
                 android:inputType="phone" />
 
             <EditText
@@ -57,9 +50,6 @@
                 style="App_EditTextStyle"
                 android:ems="10"
                 android:hint="Email"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:backgroundTint="#0c53e2"
                 android:inputType="textEmailAddress" />
 
 
@@ -74,29 +64,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="#0c53e2"
-                    android:text="Full Weekend"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white" />
+                    android:text="Full Weekend" />
 
                 <RadioButton
                     android:id="@+id/dayTicket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="#0c53e2"
-                    android:text="Day Ticket"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white" />
+                    android:text="Day Ticket" />
             </RadioGroup>
 
             <Spinner
                 android:id="@+id/DaySelector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#0c53e2"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
                 android:visibility="invisible" />
 
             <Button

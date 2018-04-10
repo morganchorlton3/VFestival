@@ -52,8 +52,40 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Bio"
-            android:textColor="@color/white"
             android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/fImgButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tint="@color/facebook_main"
+                app:srcCompat="@drawable/ic_facebook_black_36dp" />
+
+            <ImageButton
+                android:id="@+id/tImgButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:tint="@color/twitter_main"
+                app:srcCompat="@drawable/ic_twitter_black_36dp" />
+
+            <ImageButton
+                android:id="@+id/wImgButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_web_black_36dp" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

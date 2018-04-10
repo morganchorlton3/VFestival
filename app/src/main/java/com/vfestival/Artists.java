@@ -2,13 +2,16 @@ package com.vfestival;
 
 public class Artists {
 
-    private String name, bio;
+    private String name, bio, fLink, tLink, wlink;
     private int thumbnail;
 
-    public Artists(String name, String bio, int thumbnail) {
+    public Artists(String name, int thumbnail, String fLink, String tLink, String wLink, String bio) {
         this.name = name;
-        this.bio = bio;
+        this.fLink = fLink;
+        this.tLink = tLink;
+        this.wlink = wLink;
         this.thumbnail = thumbnail;
+        this.bio = bio;
     }
 
     public String getName() {
@@ -19,7 +22,11 @@ public class Artists {
         return bio;
     }
 
-    public int getThumbnail() {
-        return thumbnail;
-    }
+    public String getfLink() {return fLink;}
+
+    public String gettLink() {return tLink;}
+
+    public String getWlink() {return wlink;}
+
+    public int getThumbnail() {return thumbnail;}
 }

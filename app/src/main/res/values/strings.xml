@@ -2,7 +2,7 @@
     <string name="app_name">V Festival</string>
 
     /* Titles */
-    <string name="title_home">Home</string>
+    <string name="title_info">Info</string>
     <string name="title_lineup">Line Up</string>
     <string name="title_tickets">Tickets</string>
     <string name="title_activity_splash">SplashActivity</string>
@@ -13,4 +13,10 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.vfestival.R;
 
-public class HomeFragment extends Fragment {
+public class InfoFragment extends Fragment {
 
     @Nullable
     @Override
