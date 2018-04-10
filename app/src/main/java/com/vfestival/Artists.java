@@ -1,7 +1,40 @@
 package com.vfestival;
 
 public class Artists {
-    public static String[] name = new String[]{
+
+    private String name, bio;
+    private int thumbnail;
+
+    public Artists(String name, String bio, int thumbnail){
+        this.name = name;
+        this.bio = bio;
+        this.thumbnail = thumbnail;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public int getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setThumbnail(int thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+    /*public static String[] name = new String[]{
             "Jay Z",
             "Coldplay",
             "Bastille",
@@ -26,5 +59,5 @@ public class Artists {
             R.drawable.george_ezra,
             R.drawable.killers,
             R.drawable.lumineers,
-    };
+    };*/
 }

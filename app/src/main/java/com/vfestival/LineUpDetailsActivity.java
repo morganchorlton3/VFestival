@@ -28,11 +28,11 @@ public class LineUpDetailsActivity extends AppCompatActivity {
         bio = (TextView) findViewById(R.id.itemText);
         image = (ImageView) findViewById(R.id.artistImage);
 
-        int thumbnail = getIntent().getExtras().getInt("thumbnail");
+        int thumbnail = getIntent().getExtras().getInt("THUMBNAIL_KEY");
         image.setImageResource(thumbnail);
 
 
-        String bioText = getIntent().getExtras().getString("bio");
+        String bioText = getIntent().getExtras().getString("BIO_KEY");
         bio.setText(bioText);
     }
 }

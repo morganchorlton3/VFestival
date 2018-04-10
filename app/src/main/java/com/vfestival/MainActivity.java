@@ -11,9 +11,13 @@ import com.vfestival.Fragments.HomeFragment;
 import com.vfestival.Fragments.LineUpFragment;
 import com.vfestival.Fragments.TicketsFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
     Fragment fragment = null;
+    private List<Artists> artistsList = new ArrayList<>();
 
     public void switchToFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -61,7 +65,5 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
-
-
     }
 }

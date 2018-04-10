@@ -1,62 +1,51 @@
 package com.vfestival;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.List;
 
 
-public class ListAdapter extends RecyclerView.Adapter {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
 
-    String bio, name;
-    int thumbnail;
+    private List<Artists> artistsList;
 
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.artist_item, parent, false);
-        return new ListViewHolder(view);
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView name, year, genre;
+        public ImageView thumbnail;
+
+        public MyViewHolder(View view) {
+            super(view);
+            name = (TextView) view.findViewById(R.id.artistName);
+            thumbnail = (ImageView) view.findViewById(R.id.artistImage);
+        }
+    }
+
+
+    public ListAdapter(List<Artists> moviesList) {
+        this.artistsList = moviesList;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ListViewHolder) holder).bindView(position);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.artist_item, parent, false);
+
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Artists artist = artistsList.get(position);
+        holder.name.setText(artist.getName());
+        holder.thumbnail.setImageResource(artist.getThumbnail());
     }
 
     @Override
     public int getItemCount() {
-        return Artists.name.length;
-    }
-
-    private class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        private ImageView mItemImage;
-        private TextView mItemText;
-
-        public ListViewHolder(View itemView){
-            super(itemView);
-            mItemText = itemView.findViewById(R.id.itemText);
-            mItemImage = itemView.findViewById(R.id.artistImage);
-            itemView.setClickable(true);
-            itemView.setOnClickListener(this);
-        }
-        public void bindView(int position){
-            name = Artists.name[position];
-            bio = Artists.bio[position];
-            thumbnail = Artists.thumbnail[position];
-            mItemText.setText(name);
-            mItemImage.setImageResource(thumbnail);
-            bio = Artists.bio[position];
-        }
-
-        public void onClick(View view){
-            Intent intent = new Intent(view.getContext(), LineUpDetailsActivity.class);
-            intent.putExtra("bio", bio);
-            intent.putExtra("thumbnail", thumbnail);
-            view.getContext().startActivity(intent);
-        }
-
+        return artistsList.size();
     }
 }
