@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -62,6 +62,43 @@
                 android:backgroundTint="#0c53e2"
                 android:inputType="textEmailAddress" />
 
+
+            <RadioGroup
+                android:id="@+id/ticketType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <RadioButton
+                    android:id="@+id/fullWeekend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#0c53e2"
+                    android:text="Full Weekend"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/dayTicket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#0c53e2"
+                    android:text="Day Ticket"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+            </RadioGroup>
+
+            <Spinner
+                android:id="@+id/DaySelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#0c53e2"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:visibility="invisible" />
+
             <Button
                 android:id="@+id/RegisterBtn"
                 android:layout_width="match_parent"
@@ -71,4 +108,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

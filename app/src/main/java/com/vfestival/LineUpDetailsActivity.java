@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class LineUpDetailsActivity extends AppCompatActivity {
 
-    TextView bio;
+    TextView name, bio;
     ImageView image;
 
     @Override
@@ -25,14 +25,19 @@ public class LineUpDetailsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        bio = (TextView) findViewById(R.id.itemText);
+        name = (TextView) findViewById(R.id.artistName);
+        bio = (TextView) findViewById(R.id.artistBio);
         image = (ImageView) findViewById(R.id.artistImage);
 
         int thumbnail = getIntent().getExtras().getInt("THUMBNAIL_KEY");
         image.setImageResource(thumbnail);
 
+        String nameText = getIntent().getExtras().getString("NAME_KEY");
+        name.setText(nameText);
 
         String bioText = getIntent().getExtras().getString("BIO_KEY");
         bio.setText(bioText);
+
+
     }
 }

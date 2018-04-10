@@ -3,6 +3,7 @@ package com.vfestival.Fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,17 +14,27 @@ import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.vfestival.R;
+
+import static com.vfestival.R.array.days;
 
 public class TicketsFragment extends Fragment {
 
     final int SEND_SMS_PERMISSION_REQUEST_CODE =1;
     Button register;
     EditText nameInput, phoneInput, emailInput;
+    Spinner daySelector;
+    RadioButton fullWeekend, dayTicket;
+    private RadioGroup ticketType;
 
     @Nullable
     @Override
@@ -40,6 +51,28 @@ public class TicketsFragment extends Fragment {
         nameInput = view.findViewById(R.id.NameInput);
         phoneInput = view.findViewById(R.id.PhoneNumInput);
         emailInput = view.findViewById(R.id.EmailInput);
+        daySelector = view.findViewById(R.id.DaySelector);
+        fullWeekend = view.findViewById(R.id.fullWeekend);
+        dayTicket = view.findViewById(R.id.dayTicket);
+        ticketType = view.findViewById(R.id.ticketType);
+
+        ticketType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if( dayTicket.isChecked()){
+                    daySelector.setVisibility(View.VISIBLE);
+                }else{
+                    daySelector.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        ArrayAdapter<String> dayAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(days));
+
+        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        daySelector.setAdapter(dayAdapter);
 
         register.setEnabled(false);
         if(checkPermission(Manifest.permission.SEND_SMS)){
@@ -55,6 +88,7 @@ public class TicketsFragment extends Fragment {
         });
 
     }
+
     public void onSend(View v){
         String phoneNumber = phoneInput.getText().toString();
         String name = nameInput.getText().toString();
@@ -78,4 +112,5 @@ public class TicketsFragment extends Fragment {
         int check = ContextCompat.checkSelfPermission(getContext(), permission);
         return (check == PackageManager.PERMISSION_GRANTED);
     }
+
 }

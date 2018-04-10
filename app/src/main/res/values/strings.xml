@@ -6,4 +6,11 @@
     <string name="title_lineup">Line Up</string>
     <string name="title_tickets">Tickets</string>
     <string name="title_activity_splash">SplashActivity</string>
+
+    /* DropDown */
+    <string-array name="days">
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>
