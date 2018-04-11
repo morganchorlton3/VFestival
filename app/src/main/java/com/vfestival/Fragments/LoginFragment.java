@@ -1,9 +1,9 @@
 package com.vfestival.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,24 +23,22 @@ import com.google.firebase.auth.FirebaseUser;
 import com.vfestival.MainActivity;
 import com.vfestival.R;
 
-import java.util.concurrent.Executor;
-
 import static android.content.ContentValues.TAG;
 
-public class RegisterFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private EditText emailInput, passInput;
-    private Button regBtn;
+    private Button loginBtn;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.register_fragment, container, false);
+        View v =  inflater.inflate(R.layout.login_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
         emailInput = v.findViewById(R.id.emailInput);
         passInput = v.findViewById(R.id.passInput);
-        regBtn = v.findViewById(R.id.regBtn);
+        loginBtn = v.findViewById(R.id.loginBtn);
         return v;
     }
 
@@ -48,7 +46,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        regBtn.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = emailInput.getText().toString();
@@ -64,88 +62,32 @@ public class RegisterFragment extends Fragment {
                     return;
                 }
 
-
-                mAuth.createUserWithEmailAndPassword(email, password)
+                mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "createUserWithEmail:success");
+                                    Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUI(user);
+                                    MainActivity.updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
                                     Toast.makeText(getActivity(), "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
+                                    MainActivity.updateUI(null);
                                 }
-
-                                // ...
                             }
                         });
             }
-
         });
-
     }
-    private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
-            return;
-        }
-        
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(getContext(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-    }
-
-    private boolean validateForm() {
-        boolean valid = true;
-
-        String email = emailInput.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            emailInput.setError("Required.");
-            valid = false;
-        } else {
-            emailInput.setError(null);
-        }
-
-        String password = passInput.getText().toString();
-        if (TextUtils.isEmpty(password)) {
-            passInput.setError("Required.");
-            valid = false;
-        } else {
-            passInput.setError(null);
-        }
-
-        return valid;
-    }
-
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    private void updateUI(FirebaseUser currentUser) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        MainActivity.updateUI(user);
     }
 }

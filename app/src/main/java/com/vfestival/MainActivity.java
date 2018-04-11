@@ -1,5 +1,7 @@
 package com.vfestival;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,21 +13,34 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.vfestival.Fragments.AccountFragment;
 import com.vfestival.Fragments.InfoFragment;
 import com.vfestival.Fragments.LineUpFragment;
 import com.vfestival.Fragments.RegisterFragment;
 import com.vfestival.Fragments.TicketsFragment;
-import com.vfestival.Fragments.loginFragment;
+import com.vfestival.Fragments.LoginFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     Fragment fragment = null;
+    private FirebaseAuth mAuth;
+    private static View header;
+    private FirebaseAuth.AuthStateListener authListener;
 
     public void switchToFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -51,18 +66,6 @@ public class MainActivity extends AppCompatActivity
                     fragment = new TicketsFragment();
                     switchToFragment(fragment);
                     return true;
-                case R.id.nav_login:
-                    fragment = new loginFragment();
-                    switchToFragment(fragment);
-                    return true;
-                case R.id.nav_register:
-                    fragment = new RegisterFragment();
-                    switchToFragment(fragment);
-                    return true;
-                case R.id.nav_account:
-                    fragment = new AccountFragment();
-                    switchToFragment(fragment);
-                    return true;
 
             }
             return false;
@@ -76,13 +79,26 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if (user == null) {
+                    updateUI(user);
+                    finish();
+                } else {
+                    updateUI(user);
+                }
+            }
+        };
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-        toggle.setDrawerIndicatorEnabled(true);
-        toggle.setHomeAsUpIndicator(R.drawable.account);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -100,8 +116,12 @@ public class MainActivity extends AppCompatActivity
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_lineup);
-    }
 
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        header = navigationView.getHeaderView(0);
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -115,11 +135,47 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        switch (item.getItemId()) {
+            case R.id.nav_login:
+                fragment = new LoginFragment();
+                switchToFragment(fragment);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.nav_register:
+                fragment = new RegisterFragment();
+                switchToFragment(fragment);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.nav_account:
+                fragment = new AccountFragment();
+                switchToFragment(fragment);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.nav_signout:
+                signOut();
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+        }
+        return false;
+    }
+    public static void updateUI(FirebaseUser user) {
+        if (user != null) {
+            String email = user.getEmail();
+            TextView emaillabel = (TextView) header.findViewById(R.id.emailLabel);
+            TextView welcomeLabel = (TextView) header.findViewById(R.id.welcomeLabel);
+            welcomeLabel.setText("Hi,");
+            emaillabel.setText(email);
+        } else {
+            TextView emaillabel = (TextView) header.findViewById(R.id.emailLabel);
+            TextView welcomeLabel = (TextView) header.findViewById(R.id.welcomeLabel);
+            welcomeLabel.setText("Hi, User");
+            emaillabel.setText("Please create an account to sign in");
+        }
+    }
+    public void signOut() {
+        mAuth.signOut();
+        updateUI(null);
+        Toast.makeText(getApplicationContext(), "You have been signed out", Toast.LENGTH_SHORT).show();
     }
 }
