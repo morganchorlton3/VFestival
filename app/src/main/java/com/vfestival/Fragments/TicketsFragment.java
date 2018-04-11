@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
@@ -23,17 +25,21 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.vfestival.R;
 
 import static com.vfestival.R.array.days;
 
 public class TicketsFragment extends Fragment {
 
+    private FirebaseAuth mAuth;
     final int SEND_SMS_PERMISSION_REQUEST_CODE =1;
     Button register;
     EditText nameInput, phoneInput, emailInput;
     Spinner daySelector;
     RadioButton fullWeekend, dayTicket;
+    String email;
     private RadioGroup ticketType;
 
     @Nullable
@@ -47,6 +53,11 @@ public class TicketsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            email = user.getEmail();
+        }
         register = view.findViewById(R.id.RegisterBtn);
         nameInput = view.findViewById(R.id.NameInput);
         phoneInput = view.findViewById(R.id.PhoneNumInput);
@@ -86,6 +97,7 @@ public class TicketsFragment extends Fragment {
                 onSend(v);
             }
         });
+        emailInput.setText(email);
 
     }
 

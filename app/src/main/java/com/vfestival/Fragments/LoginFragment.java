@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +31,7 @@ public class LoginFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private EditText emailInput, passInput;
-    private Button loginBtn;
+    private Button loginBtn, backToRegister;
 
     @Nullable
     @Override
@@ -38,13 +40,24 @@ public class LoginFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         emailInput = v.findViewById(R.id.emailInput);
         passInput = v.findViewById(R.id.passInput);
-        loginBtn = v.findViewById(R.id.loginBtn);
+        loginBtn = v.findViewById(R.id.btn_login);
+        backToRegister = v.findViewById(R.id.btn_register);
         return v;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        backToRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager2 = getFragmentManager();
+                FragmentTransaction ft = fragmentManager2.beginTransaction();
+                ft.replace(R.id.fragment_view, new RegisterFragment());
+                ft.commit();
+            }
+        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +84,12 @@ public class LoginFragment extends Fragment {
                                     Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     MainActivity.updateUI(user);
+                                    FragmentManager fragmentManager2 = getFragmentManager();
+                                    FragmentTransaction ft = fragmentManager2.beginTransaction();
+                                    ft.replace(R.id.fragment_view, new LineUpFragment());
+                                    ft.commit();
+                                    Toast.makeText(getActivity(), "Login Successful!",
+                                            Toast.LENGTH_SHORT).show();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());

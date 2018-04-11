@@ -13,23 +13,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.vfestival.Fragments.AccountFragment;
 import com.vfestival.Fragments.InfoFragment;
 import com.vfestival.Fragments.LineUpFragment;
+import com.vfestival.Fragments.PleaseLoginFragment;
 import com.vfestival.Fragments.RegisterFragment;
 import com.vfestival.Fragments.TicketsFragment;
 import com.vfestival.Fragments.LoginFragment;
@@ -38,8 +31,10 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Fragment fragment = null;
+    private static boolean userIsLoggedIn = false;
     private FirebaseAuth mAuth;
     private static View header;
+    private static NavigationView navigationView;
     private FirebaseAuth.AuthStateListener authListener;
 
     public void switchToFragment(Fragment fragment) {
@@ -63,8 +58,13 @@ public class MainActivity extends AppCompatActivity
                     switchToFragment(fragment);
                     return true;
                 case R.id.navigation_tickets:
-                    fragment = new TicketsFragment();
-                    switchToFragment(fragment);
+                    if (userIsLoggedIn == true){
+                        fragment = new TicketsFragment();
+                        switchToFragment(fragment);
+                    }else if (userIsLoggedIn == false) {
+                        fragment = new PleaseLoginFragment();
+                        switchToFragment(fragment);
+                    }
                     return true;
 
             }
@@ -89,8 +89,10 @@ public class MainActivity extends AppCompatActivity
                 if (user == null) {
                     updateUI(user);
                     finish();
+                    userIsLoggedIn = false;
                 } else {
                     updateUI(user);
+                    userIsLoggedIn = true;
                 }
             }
         };
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         fragment = new LineUpFragment();
@@ -166,11 +168,17 @@ public class MainActivity extends AppCompatActivity
             TextView welcomeLabel = (TextView) header.findViewById(R.id.welcomeLabel);
             welcomeLabel.setText("Hi,");
             emaillabel.setText(email);
+            navigationView.getMenu().setGroupVisible(R.id.logged_in, true);
+            navigationView.getMenu().setGroupVisible(R.id.logged_out, false);
+            userIsLoggedIn = true;
         } else {
             TextView emaillabel = (TextView) header.findViewById(R.id.emailLabel);
             TextView welcomeLabel = (TextView) header.findViewById(R.id.welcomeLabel);
             welcomeLabel.setText("Hi, User");
             emaillabel.setText("Please create an account to sign in");
+            navigationView.getMenu().setGroupVisible(R.id.logged_in, false);
+            navigationView.getMenu().setGroupVisible(R.id.logged_out, true);
+            userIsLoggedIn = false;
         }
     }
     public void signOut() {
