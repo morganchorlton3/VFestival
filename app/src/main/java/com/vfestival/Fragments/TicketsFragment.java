@@ -4,7 +4,10 @@ package com.vfestival.Fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -29,7 +32,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.vfestival.R;
 
+import java.util.Properties;
+
 import static com.vfestival.R.array.days;
+import static com.vfestival.R.array.quantity;
 
 public class TicketsFragment extends Fragment {
 
@@ -37,10 +43,10 @@ public class TicketsFragment extends Fragment {
     final int SEND_SMS_PERMISSION_REQUEST_CODE =1;
     Button register;
     EditText nameInput, phoneInput, emailInput;
-    Spinner daySelector;
-    RadioButton fullWeekend, dayTicket;
-    String email;
-    private RadioGroup ticketType;
+    Spinner daySelector, QSelector;
+    RadioButton fullWeekend, dayTicket, selectedRadioButton;
+    String nameString, emailString, quantityString,  ticketTypeString;
+    RadioGroup ticketType;
 
     @Nullable
     @Override
@@ -56,13 +62,15 @@ public class TicketsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null){
-            email = user.getEmail();
+            emailString = user.getEmail();
+           // emailInput.setText(emailString);
         }
         register = view.findViewById(R.id.RegisterBtn);
         nameInput = view.findViewById(R.id.NameInput);
         phoneInput = view.findViewById(R.id.PhoneNumInput);
         emailInput = view.findViewById(R.id.EmailInput);
         daySelector = view.findViewById(R.id.DaySelector);
+        QSelector = view.findViewById(R.id.QSelector);
         fullWeekend = view.findViewById(R.id.fullWeekend);
         dayTicket = view.findViewById(R.id.dayTicket);
         ticketType = view.findViewById(R.id.ticketType);
@@ -85,6 +93,12 @@ public class TicketsFragment extends Fragment {
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySelector.setAdapter(dayAdapter);
 
+        ArrayAdapter<String> QAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(quantity));
+
+        QAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        QSelector.setAdapter(QAdapter);
+
         register.setEnabled(false);
         if(checkPermission(Manifest.permission.SEND_SMS)){
             register.setEnabled(true);
@@ -94,29 +108,52 @@ public class TicketsFragment extends Fragment {
         }
         register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                onSend(v);
+                int selectedId = ticketType.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                selectedRadioButton = v.findViewById(selectedId);
+
+                if (dayTicket.isChecked()){
+                    ticketTypeString = daySelector.getSelectedItem().toString() + " Ticket (s)";
+                }else if (fullWeekend.isChecked()){
+                    ticketTypeString = "Full Weekend Ticket (s)";
+                }
+
+                nameString = nameInput.getText().toString();
+                quantityString = QSelector.getSelectedItem().toString();
+
+                String message = "Hi " + nameString + ", your booking of " + quantityString + " " + ticketTypeString + " has been successful. Thank you for booking your tickets for V Festival 2018!";
+
+
+                /*Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, emailString);
+                intent.putExtra(Intent.EXTRA_SUBJECT, "V Festival Booking Confirmation");
+                intent.putExtra(Intent.EXTRA_TEXT, message );
+                intent.setType("message/rfc822");
+                Intent chooser = Intent.createChooser(intent, "Send Email");
+                startActivity(chooser);*/
+
+                onSend(v, message);
             }
         });
-        emailInput.setText(email);
 
     }
 
-    public void onSend(View v){
+    public void onSend(View v ,String message){
         String phoneNumber = phoneInput.getText().toString();
-        String name = nameInput.getText().toString();
-        String smsMessage = "Hi, " + name + " Your tickets have successfully been booked for V Fest, see you soon!";
 
         if(phoneNumber == null || phoneNumber.length() == 0 ||
-                smsMessage == null || smsMessage.length() == 0){
+                message == null || message.length() == 0){
             return;
         }
 
         if(checkPermission(Manifest.permission.SEND_SMS)){
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNumber, null, smsMessage, null, null);
-            Toast.makeText(getContext(), "Message Sent!", Toast.LENGTH_SHORT).show();
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+            Toast.makeText(getContext(), "Thank you for booking tickets, you will receive an email and a sms shortly to confirm your booking", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(getContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "An error occurred!", Toast.LENGTH_SHORT).show();
         }
     }
 

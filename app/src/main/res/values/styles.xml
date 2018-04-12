@@ -9,6 +9,7 @@
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColor">@color/platinum</item>
         <item name="android:textColorHint">@color/platinum</item>
+        <item name="android:editTextColor">@color/platinum</item>s
         <item name="colorButtonNormal">@color/colorAccent</item>
     </style>
 

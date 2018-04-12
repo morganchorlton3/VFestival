@@ -161,6 +161,13 @@ public class MainActivity extends AppCompatActivity
         }
         return false;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        updateUI(user);
+    }
     public static void updateUI(FirebaseUser user) {
         if (user != null) {
             String email = user.getEmail();

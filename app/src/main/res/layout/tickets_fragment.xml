@@ -53,6 +53,12 @@
                 android:inputType="textEmailAddress" />
 
 
+            <Spinner
+                android:id="@+id/QSelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible" />
+
             <RadioGroup
                 android:id="@+id/ticketType"
                 android:layout_width="match_parent"
@@ -64,21 +70,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Full Weekend" />
+                    android:text=" Full Weekend"
+                    android:textColor="@color/platinum"/>
 
                 <RadioButton
                     android:id="@+id/dayTicket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Day Ticket" />
+                    android:text=" Day Ticket"
+                    android:textColor="@color/platinum"/>
             </RadioGroup>
 
             <Spinner
                 android:id="@+id/DaySelector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                android:text="Quantity"/>
 
             <Button
                 android:id="@+id/RegisterBtn"
