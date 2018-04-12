@@ -37,7 +37,26 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
-    <string name="title_activity_main2">Main2Activity</string>
+
+    /* info array list */
+    <string-array name="catagories">
+        <item>Opening Times</item>
+        <item>Age Restrictions</item>
+        <item>Valid Id</item>
+        <item>What you can / can't bring"</item>
+        <item>Travel and transport</item>
+        <item>Safety and security</item>
+    </string-array>
+
+
+    <string-array name="catagories_info">
+        <item>&lt;b>Car Parks: &lt;/b> 9am Friday &lt;br /&gt; &lt;b>Campsites: &lt;/b> 12:00 Friday &lt;br /&gt; &lt;b>Box office: &lt;/b> 13:00 Friday</item>
+        <item>V Festival is not a suitable festival for young children. Children under 10 are not permitted, 16 and under must be accompanied by an adult aged 18 or over.</item>
+        <item>All adults must bring a valid form of UK identification (Passport, Driving licence).</item>
+        <item>Large bags are permitted within the camp site area, only small bags are permitted on the festival floor and bag searches will be required on entering the festival.</item>
+        <item>&lt;b>Traveling to the festival by car: &lt;/b> &lt;br /&gt; please follow signs for V Festival to find your way to the main car park, on arrival you will be require to pay £20.00 fee for parking (this is per weekend)</item>
+        <item>At V Festival we do not accept any discrimination towards any individual or groups of individuals. Any individuals are causing problems they will be immediately removed and any necessary further action will be taken if required.</item>
+    </string-array>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

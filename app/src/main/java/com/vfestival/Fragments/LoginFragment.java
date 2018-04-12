@@ -84,12 +84,12 @@ public class LoginFragment extends Fragment {
                                     Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     MainActivity.updateUI(user);
+                                    Toast.makeText(getActivity(), "Login Successful!",
+                                            Toast.LENGTH_SHORT).show();
                                     FragmentManager fragmentManager2 = getFragmentManager();
                                     FragmentTransaction ft = fragmentManager2.beginTransaction();
                                     ft.replace(R.id.fragment_view, new LineUpFragment());
                                     ft.commit();
-                                    Toast.makeText(getActivity(), "Login Successful!",
-                                            Toast.LENGTH_SHORT).show();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());

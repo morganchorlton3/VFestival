@@ -25,6 +25,9 @@
             android:name=".LineUpDetailsActivity"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".InfoDetailsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
