@@ -10,6 +10,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.github.ybq.android.spinkit.style.Wave;
+
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = SplashActivity.class.getSimpleName();
@@ -25,6 +28,10 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        ProgressBar progressBar = (ProgressBar)findViewById(R.id.preLoader);
+        Wave wave = new Wave();
+        progressBar.setIndeterminateDrawable(wave);
 
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {

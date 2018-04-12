@@ -85,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:tint="@color/colorAccent"
                 app:srcCompat="@drawable/ic_web_black_36dp" />
         </LinearLayout>
 
