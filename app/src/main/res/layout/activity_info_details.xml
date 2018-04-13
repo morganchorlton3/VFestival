@@ -24,8 +24,9 @@
             android:background="@android:color/transparent"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Bio"
+            android:text="Info"
             android:textSize="18sp" />
+
     </LinearLayout>
 </ScrollView>
 

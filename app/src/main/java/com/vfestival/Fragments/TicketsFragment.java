@@ -101,7 +101,7 @@ public class TicketsFragment extends Fragment {
         QSelector.setAdapter(QAdapter);
 
         register.setEnabled(false);
-        if(checkPermission(Manifest.permission.SEND_SMS)){
+        if(checkPermissionSMS(Manifest.permission.SEND_SMS)){
             register.setEnabled(true);
         }else {
             ActivityCompat.requestPermissions((Activity) getContext(),
@@ -138,7 +138,8 @@ public class TicketsFragment extends Fragment {
             return;
         }
 
-        if(checkPermission(Manifest.permission.SEND_SMS)){
+
+        if(checkPermissionSMS(Manifest.permission.SEND_SMS) && checkPermissionREAD(Manifest.permission.SEND_SMS)){
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNumber, null, message, null, null);
             Snackbar snackbar = Snackbar.make(getView(),  "Thank you for booking tickets, you will receive an sms shortly to confirm your booking", Snackbar.LENGTH_LONG);
@@ -148,8 +149,12 @@ public class TicketsFragment extends Fragment {
         }
     }
 
-    public boolean checkPermission(String permission){
+    public boolean checkPermissionSMS(String permission){
         int check = ContextCompat.checkSelfPermission(getContext(), permission);
+        return (check == PackageManager.PERMISSION_GRANTED);
+    }
+    public boolean checkPermissionREAD(String permission){
+        int check = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE);
         return (check == PackageManager.PERMISSION_GRANTED);
     }
 
