@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#EE2D28</color>
     <color name="platinum">#DEE7E7</color>
+    <color name="transparent">#00000000</color>
 
     <color name="Background_main">#1D1D1D</color>
 

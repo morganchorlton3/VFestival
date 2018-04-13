@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.vfestival.MainActivity;
 import com.vfestival.R;
 
 import static android.content.ContentValues.TAG;
@@ -60,7 +61,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String email = emailInput.getText().toString();
-                final String password = passInput.getText().toString();
+                String password = passInput.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getContext(), "Please enter email address!", Toast.LENGTH_SHORT).show();
@@ -81,7 +82,7 @@ public class RegisterFragment extends Fragment {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUI(user);
+                                    MainActivity.updateUI(user);
                                     FragmentManager fragmentManager2 = getFragmentManager();
                                     FragmentTransaction ft = fragmentManager2.beginTransaction();
                                     ft.replace(R.id.fragment_view, new LineUpFragment());
@@ -91,9 +92,9 @@ public class RegisterFragment extends Fragment {
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(getActivity(), "Authentication failed.",
+                                    Toast.makeText(getContext(), getString(R.string.auth_failed),
                                             Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
+                                    MainActivity.updateUI(null);
                                 }
 
                                 // ...
@@ -109,9 +110,7 @@ public class RegisterFragment extends Fragment {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        MainActivity.updateUI(currentUser);
     }
 
-    private void updateUI(FirebaseUser currentUser) {
-    }
 }

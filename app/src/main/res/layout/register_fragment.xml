@@ -23,18 +23,20 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
@@ -46,7 +48,7 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="@string/register"
             android:textColor="@android:color/black"
             android:textStyle="bold" />

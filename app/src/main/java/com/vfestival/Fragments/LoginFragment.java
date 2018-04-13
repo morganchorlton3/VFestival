@@ -1,12 +1,15 @@
 package com.vfestival.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +34,7 @@ public class LoginFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private EditText emailInput, passInput;
-    private Button loginBtn, backToRegister;
+    private Button loginBtn, backToRegister, forgottenPassword;
 
     @Nullable
     @Override
@@ -42,12 +45,23 @@ public class LoginFragment extends Fragment {
         passInput = v.findViewById(R.id.passInput);
         loginBtn = v.findViewById(R.id.btn_login);
         backToRegister = v.findViewById(R.id.btn_register);
+        forgottenPassword = v.findViewById(R.id.btn_forgotten_password);
         return v;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        forgottenPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager2 = getFragmentManager();
+                FragmentTransaction ft = fragmentManager2.beginTransaction();
+                ft.replace(R.id.fragment_view, new ForgottenPasswordFragment());
+                ft.commit();
+            }
+        });
 
         backToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,11 +105,13 @@ public class LoginFragment extends Fragment {
                                     ft.replace(R.id.fragment_view, new LineUpFragment());
                                     ft.commit();
                                 } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(getActivity(), "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    MainActivity.updateUI(null);
+                                    if (password.length() < 6) {
+                                        passInput.setError(getString(R.string.minimum_password));
+                                    } else {
+                                        Snackbar snackbar = Snackbar.make(getView(),  getString(R.string.auth_failed), Snackbar.LENGTH_SHORT);
+                                        snackbar.show();
+
+                                    }
                                 }
                             }
                         });

@@ -2,10 +2,12 @@ package com.vfestival;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -16,9 +18,6 @@ import com.github.ybq.android.spinkit.style.Wave;
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = SplashActivity.class.getSimpleName();
-
-    private final int SPLASH_DISPLAY_LENGTH = 3500;
-    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +36,39 @@ public class SplashActivity extends AppCompatActivity {
         if (null != actionBar) {
             actionBar.hide();
         }
+        startHeavyProcessing();
+    }
+    private void startHeavyProcessing(){
+        new LongOperation().execute("");
+    }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent startActivityIntent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(startActivityIntent);
-                SplashActivity.this.finish();
+    private class LongOperation extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            //some heavy processing resulting in a Data String
+            for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
             }
-        }, SPLASH_DISPLAY_LENGTH);
+            return "whatever result you have";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Intent i = new Intent(SplashActivity.this, MainActivity.class);
+            i.putExtra("data", result);
+            startActivity(i);
+            finish();
+        }
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
     }
 }

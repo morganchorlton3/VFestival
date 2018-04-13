@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -123,17 +124,6 @@ public class TicketsFragment extends Fragment {
                 quantityString = QSelector.getSelectedItem().toString();
 
                 String message = "Hi " + nameString + ", your booking of " + quantityString + " " + ticketTypeString + " has been successful. Thank you for booking your tickets for V Festival 2018!";
-
-
-                /*Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setData(Uri.parse("mailto:"));
-                intent.putExtra(Intent.EXTRA_EMAIL, emailString);
-                intent.putExtra(Intent.EXTRA_SUBJECT, "V Festival Booking Confirmation");
-                intent.putExtra(Intent.EXTRA_TEXT, message );
-                intent.setType("message/rfc822");
-                Intent chooser = Intent.createChooser(intent, "Send Email");
-                startActivity(chooser);*/
-
                 onSend(v, message);
             }
         });
@@ -151,7 +141,8 @@ public class TicketsFragment extends Fragment {
         if(checkPermission(Manifest.permission.SEND_SMS)){
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNumber, null, message, null, null);
-            Toast.makeText(getContext(), "Thank you for booking tickets, you will receive an email and a sms shortly to confirm your booking", Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(getView(),  "Thank you for booking tickets, you will receive an sms shortly to confirm your booking", Snackbar.LENGTH_LONG);
+            snackbar.show();
         }else{
             Toast.makeText(getContext(), "An error occurred!", Toast.LENGTH_SHORT).show();
         }

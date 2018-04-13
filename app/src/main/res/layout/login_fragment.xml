@@ -27,6 +27,7 @@
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
@@ -36,6 +37,7 @@
             android:id="@+id/passInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
@@ -47,10 +49,27 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="@string/Login"
-            android:textColor="@android:color/black"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_forgotten_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@null"
+            android:text="@string/send_password_reset_email"
+            android:textAllCaps="false"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:layout_marginTop="20dip"
+            android:textAlignment="center"
+            android:textSize="24sp" />
 
         <!-- Link to Login Screen -->
 
@@ -60,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@null"
-            android:text="@string/btn_link_to_login"
+            android:text="@string/btn_link_to_register"
             android:textAllCaps="false"
             android:textSize="15sp" />
     </LinearLayout>
