@@ -61,7 +61,8 @@ public class ChangeEmailFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager fragmentManager2 = getFragmentManager();
                 FragmentTransaction ft = fragmentManager2.beginTransaction();
-                ft.replace(R.id.fragment_view, new LoginFragment());
+                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+                ft.replace(R.id.fragment_view, new AccountFragment());
                 ft.commit();
             }
         });
@@ -105,6 +106,7 @@ public class ChangeEmailFragment extends Fragment {
         Toast.makeText(getContext(), "You have been signed out", Toast.LENGTH_SHORT).show();
         FragmentManager fragmentManager2 = getFragmentManager();
         FragmentTransaction ft = fragmentManager2.beginTransaction();
+        ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         ft.replace(R.id.fragment_view, new LineUpFragment());
         ft.commit();
     }

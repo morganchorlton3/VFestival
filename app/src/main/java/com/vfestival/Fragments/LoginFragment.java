@@ -1,15 +1,12 @@
 package com.vfestival.Fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -58,6 +53,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager fragmentManager2 = getFragmentManager();
                 FragmentTransaction ft = fragmentManager2.beginTransaction();
+                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 ft.replace(R.id.fragment_view, new ForgottenPasswordFragment());
                 ft.commit();
             }
@@ -68,6 +64,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager fragmentManager2 = getFragmentManager();
                 FragmentTransaction ft = fragmentManager2.beginTransaction();
+                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 ft.replace(R.id.fragment_view, new RegisterFragment());
                 ft.commit();
             }
@@ -102,6 +99,7 @@ public class LoginFragment extends Fragment {
                                             Toast.LENGTH_SHORT).show();
                                     FragmentManager fragmentManager2 = getFragmentManager();
                                     FragmentTransaction ft = fragmentManager2.beginTransaction();
+                                    ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                                     ft.replace(R.id.fragment_view, new LineUpFragment());
                                     ft.commit();
                                 } else {

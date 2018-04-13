@@ -36,6 +36,7 @@ public class PleaseLoginFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager fragmentManager2 = getFragmentManager();
                 FragmentTransaction ft = fragmentManager2.beginTransaction();
+                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 ft.replace(R.id.fragment_view, new RegisterFragment());
                 ft.commit();
             }
@@ -46,6 +47,7 @@ public class PleaseLoginFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager fragmentManager2 = getFragmentManager();
                 FragmentTransaction ft = fragmentManager2.beginTransaction();
+                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 ft.replace(R.id.fragment_view, new LoginFragment());
                 ft.commit();
             }
