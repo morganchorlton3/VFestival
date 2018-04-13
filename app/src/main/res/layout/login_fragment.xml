@@ -17,19 +17,20 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_activity_login"
+            android:text="@string/Login"
             android:textSize="30sp" />
 
         <EditText
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/email"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/passInput"
@@ -37,20 +38,30 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:selectAllOnFocus="false"
+            android:singleLine="false" />
 
         <Button
             android:id="@+id/btn_login"
+            style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_activity_login" />
+            android:layout_marginTop="16dp"
+            android:text="@string/Login"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <!-- Link to Login Screen -->
 
         <Button
             android:id="@+id/btn_register"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
             android:background="@null"
-            android:text="@string/btn_link_to_register" />
-
+            android:text="@string/btn_link_to_login"
+            android:textAllCaps="false"
+            android:textSize="15sp" />
     </LinearLayout>
 </RelativeLayout>
